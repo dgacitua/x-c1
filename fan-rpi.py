@@ -9,7 +9,7 @@ import subprocess
 servo = 18
 
 IO.setwarnings(False)
-IO.setmode (IO.BCM)
+IO.setmode(IO.BCM)
 IO.setup(servo,IO.OUT)
 fan = IO.PWM(servo,25000)
 fan.start(0)
@@ -24,6 +24,7 @@ def get_temp():
 
 while 1:
     temp = get_temp()                        # Get the current CPU temperature
+    
     if temp > 70:                            # Check temperature threshhold, in degrees celcius
         fan.ChangeDutyCycle(100)             # Set fan duty based on temperature, 100 is max speed and 0 is min speed or off.
     elif temp > 60:
@@ -38,4 +39,5 @@ while 1:
         fan.ChangeDutyCycle(15)
     else:
         fan.ChangeDutyCycle(0)
-    time.sleep(5)                            # Sleep for 5 seconds
+
+    time.sleep(30)                            # Sleep for 30 seconds
